@@ -54,45 +54,67 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/orzel/israel/new_osd
+CMAKE_SOURCE_DIR = /home/orzel/israel/PrimaryFlightDisplay
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/orzel/israel/new_osd/bin
+CMAKE_BINARY_DIR = /home/orzel/israel/PrimaryFlightDisplay/bin
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
 all: CMakeFiles/fpv_osd.dir/all
+all: src/imgui/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/fpv_osd.dir/codegen
+codegen: src/imgui/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: src/imgui/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/fpv_osd.dir/clean
+clean: src/imgui/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory src/imgui
+
+# Recursive "all" directory target.
+src/imgui/all: src/imgui/CMakeFiles/imgui.dir/all
+.PHONY : src/imgui/all
+
+# Recursive "codegen" directory target.
+src/imgui/codegen: src/imgui/CMakeFiles/imgui.dir/codegen
+.PHONY : src/imgui/codegen
+
+# Recursive "preinstall" directory target.
+src/imgui/preinstall:
+.PHONY : src/imgui/preinstall
+
+# Recursive "clean" directory target.
+src/imgui/clean: src/imgui/CMakeFiles/imgui.dir/clean
+.PHONY : src/imgui/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/fpv_osd.dir
 
 # All Build rule for target.
-CMakeFiles/fpv_osd.dir/all:
+CMakeFiles/fpv_osd.dir/all: src/imgui/CMakeFiles/imgui.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/orzel/israel/new_osd/bin/CMakeFiles --progress-num=1,2 "Built target fpv_osd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=1,2,3 "Built target fpv_osd"
 .PHONY : CMakeFiles/fpv_osd.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/fpv_osd.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/new_osd/bin/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/fpv_osd.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/new_osd/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles 0
 .PHONY : CMakeFiles/fpv_osd.dir/rule
 
 # Convenience name for target.
@@ -102,13 +124,45 @@ fpv_osd: CMakeFiles/fpv_osd.dir/rule
 # codegen rule for target.
 CMakeFiles/fpv_osd.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/orzel/israel/new_osd/bin/CMakeFiles --progress-num=1,2 "Finished codegen for target fpv_osd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=1,2,3 "Finished codegen for target fpv_osd"
 .PHONY : CMakeFiles/fpv_osd.dir/codegen
 
 # clean rule for target.
 CMakeFiles/fpv_osd.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/clean
 .PHONY : CMakeFiles/fpv_osd.dir/clean
+
+#=============================================================================
+# Target rules for target src/imgui/CMakeFiles/imgui.dir
+
+# All Build rule for target.
+src/imgui/CMakeFiles/imgui.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/imgui/CMakeFiles/imgui.dir/build.make src/imgui/CMakeFiles/imgui.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/imgui/CMakeFiles/imgui.dir/build.make src/imgui/CMakeFiles/imgui.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=4,5,6,7,8,9,10 "Built target imgui"
+.PHONY : src/imgui/CMakeFiles/imgui.dir/all
+
+# Build rule for subdir invocation for target.
+src/imgui/CMakeFiles/imgui.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles 7
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/imgui/CMakeFiles/imgui.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles 0
+.PHONY : src/imgui/CMakeFiles/imgui.dir/rule
+
+# Convenience name for target.
+imgui: src/imgui/CMakeFiles/imgui.dir/rule
+.PHONY : imgui
+
+# codegen rule for target.
+src/imgui/CMakeFiles/imgui.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f src/imgui/CMakeFiles/imgui.dir/build.make src/imgui/CMakeFiles/imgui.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=4,5,6,7,8,9,10 "Finished codegen for target imgui"
+.PHONY : src/imgui/CMakeFiles/imgui.dir/codegen
+
+# clean rule for target.
+src/imgui/CMakeFiles/imgui.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/imgui/CMakeFiles/imgui.dir/build.make src/imgui/CMakeFiles/imgui.dir/clean
+.PHONY : src/imgui/CMakeFiles/imgui.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

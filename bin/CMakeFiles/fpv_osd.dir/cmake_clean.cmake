@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/fpv_osd.dir/link.d"
+  "CMakeFiles/fpv_osd.dir/src/camera.cpp.o"
+  "CMakeFiles/fpv_osd.dir/src/camera.cpp.o.d"
   "CMakeFiles/fpv_osd.dir/src/main.cpp.o"
   "CMakeFiles/fpv_osd.dir/src/main.cpp.o.d"
   "fpv_osd"

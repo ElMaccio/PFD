@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/orzel/israel/new_osd
+CMAKE_SOURCE_DIR = /home/orzel/israel/PrimaryFlightDisplay
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/orzel/israel/new_osd/bin
+CMAKE_BINARY_DIR = /home/orzel/israel/PrimaryFlightDisplay/bin
 
 # Include any dependencies generated for this target.
 include CMakeFiles/fpv_osd.dir/depend.make
@@ -73,31 +73,48 @@ CMakeFiles/fpv_osd.dir/codegen:
 .PHONY : CMakeFiles/fpv_osd.dir/codegen
 
 CMakeFiles/fpv_osd.dir/src/main.cpp.o: CMakeFiles/fpv_osd.dir/flags.make
-CMakeFiles/fpv_osd.dir/src/main.cpp.o: /home/orzel/israel/new_osd/src/main.cpp
+CMakeFiles/fpv_osd.dir/src/main.cpp.o: /home/orzel/israel/PrimaryFlightDisplay/src/main.cpp
 CMakeFiles/fpv_osd.dir/src/main.cpp.o: CMakeFiles/fpv_osd.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/israel/new_osd/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/fpv_osd.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/fpv_osd.dir/src/main.cpp.o -MF CMakeFiles/fpv_osd.dir/src/main.cpp.o.d -o CMakeFiles/fpv_osd.dir/src/main.cpp.o -c /home/orzel/israel/new_osd/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/fpv_osd.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/fpv_osd.dir/src/main.cpp.o -MF CMakeFiles/fpv_osd.dir/src/main.cpp.o.d -o CMakeFiles/fpv_osd.dir/src/main.cpp.o -c /home/orzel/israel/PrimaryFlightDisplay/src/main.cpp
 
 CMakeFiles/fpv_osd.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/fpv_osd.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/israel/new_osd/src/main.cpp > CMakeFiles/fpv_osd.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/israel/PrimaryFlightDisplay/src/main.cpp > CMakeFiles/fpv_osd.dir/src/main.cpp.i
 
 CMakeFiles/fpv_osd.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/fpv_osd.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/israel/new_osd/src/main.cpp -o CMakeFiles/fpv_osd.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/israel/PrimaryFlightDisplay/src/main.cpp -o CMakeFiles/fpv_osd.dir/src/main.cpp.s
+
+CMakeFiles/fpv_osd.dir/src/camera.cpp.o: CMakeFiles/fpv_osd.dir/flags.make
+CMakeFiles/fpv_osd.dir/src/camera.cpp.o: /home/orzel/israel/PrimaryFlightDisplay/src/camera.cpp
+CMakeFiles/fpv_osd.dir/src/camera.cpp.o: CMakeFiles/fpv_osd.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/fpv_osd.dir/src/camera.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/fpv_osd.dir/src/camera.cpp.o -MF CMakeFiles/fpv_osd.dir/src/camera.cpp.o.d -o CMakeFiles/fpv_osd.dir/src/camera.cpp.o -c /home/orzel/israel/PrimaryFlightDisplay/src/camera.cpp
+
+CMakeFiles/fpv_osd.dir/src/camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/fpv_osd.dir/src/camera.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/israel/PrimaryFlightDisplay/src/camera.cpp > CMakeFiles/fpv_osd.dir/src/camera.cpp.i
+
+CMakeFiles/fpv_osd.dir/src/camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/fpv_osd.dir/src/camera.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/israel/PrimaryFlightDisplay/src/camera.cpp -o CMakeFiles/fpv_osd.dir/src/camera.cpp.s
 
 # Object files for target fpv_osd
 fpv_osd_OBJECTS = \
-"CMakeFiles/fpv_osd.dir/src/main.cpp.o"
+"CMakeFiles/fpv_osd.dir/src/main.cpp.o" \
+"CMakeFiles/fpv_osd.dir/src/camera.cpp.o"
 
 # External object files for target fpv_osd
 fpv_osd_EXTERNAL_OBJECTS =
 
 fpv_osd: CMakeFiles/fpv_osd.dir/src/main.cpp.o
+fpv_osd: CMakeFiles/fpv_osd.dir/src/camera.cpp.o
 fpv_osd: CMakeFiles/fpv_osd.dir/build.make
 fpv_osd: CMakeFiles/fpv_osd.dir/compiler_depend.ts
+fpv_osd: src/imgui/libimgui.so
 fpv_osd: CMakeFiles/fpv_osd.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/orzel/israel/new_osd/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable fpv_osd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable fpv_osd"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/fpv_osd.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -109,6 +126,6 @@ CMakeFiles/fpv_osd.dir/clean:
 .PHONY : CMakeFiles/fpv_osd.dir/clean
 
 CMakeFiles/fpv_osd.dir/depend:
-	cd /home/orzel/israel/new_osd/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/orzel/israel/new_osd /home/orzel/israel/new_osd /home/orzel/israel/new_osd/bin /home/orzel/israel/new_osd/bin /home/orzel/israel/new_osd/bin/CMakeFiles/fpv_osd.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/orzel/israel/PrimaryFlightDisplay/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/orzel/israel/PrimaryFlightDisplay /home/orzel/israel/PrimaryFlightDisplay /home/orzel/israel/PrimaryFlightDisplay/bin /home/orzel/israel/PrimaryFlightDisplay/bin /home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles/fpv_osd.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/fpv_osd.dir/depend
 

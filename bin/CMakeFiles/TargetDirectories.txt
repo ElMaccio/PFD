@@ -1,3 +1,6 @@
-/home/orzel/israel/new_osd/bin/CMakeFiles/fpv_osd.dir
-/home/orzel/israel/new_osd/bin/CMakeFiles/edit_cache.dir
-/home/orzel/israel/new_osd/bin/CMakeFiles/rebuild_cache.dir
+/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles/fpv_osd.dir
+/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles/edit_cache.dir
+/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles/rebuild_cache.dir
+/home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui/CMakeFiles/imgui.dir
+/home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui/CMakeFiles/edit_cache.dir
+/home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui/CMakeFiles/rebuild_cache.dir

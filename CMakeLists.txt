@@ -15,6 +15,8 @@ pkg_check_modules(GLESV2 REQUIRED glesv2)
 pkg_check_modules(GBM REQUIRED gbm)
 pkg_check_modules(DRM REQUIRED libdrm)
 
+add_subdirectory(src/imgui)
+
 include_directories(
     ${LIBCAMERA_INCLUDE_DIRS}
     ${EGL_INCLUDE_DIRS}
@@ -31,7 +33,8 @@ link_directories(
     ${DRM_LIBRARY_DIRS}
 )
 
-add_executable(fpv_osd src/main.cpp)
+add_executable(fpv_osd src/main.cpp
+                        src/camera.cpp)
 
 target_link_libraries(fpv_osd
     ${LIBCAMERA_LIBRARIES}
@@ -39,6 +42,8 @@ target_link_libraries(fpv_osd
     ${GLESV2_LIBRARIES}
     ${GBM_LIBRARIES}
     ${DRM_LIBRARIES}
+    ${GLESv2_LIBRARY}
+    imgui
     pthread
     rt
 )

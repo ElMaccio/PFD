@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/orzel/israel/new_osd
+CMAKE_SOURCE_DIR = /home/orzel/israel/PrimaryFlightDisplay
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/orzel/israel/new_osd/bin
+CMAKE_BINARY_DIR = /home/orzel/israel/PrimaryFlightDisplay/bin
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/new_osd/bin/CMakeFiles /home/orzel/israel/new_osd/bin//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles /home/orzel/israel/PrimaryFlightDisplay/bin//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/new_osd/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,6 +129,43 @@ fpv_osd/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/build
 .PHONY : fpv_osd/fast
 
+#=============================================================================
+# Target rules for targets named imgui
+
+# Build rule for target.
+imgui: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imgui
+.PHONY : imgui
+
+# fast build rule for target.
+imgui/fast:
+	$(MAKE) $(MAKESILENT) -f src/imgui/CMakeFiles/imgui.dir/build.make src/imgui/CMakeFiles/imgui.dir/build
+.PHONY : imgui/fast
+
+src/camera.o: src/camera.cpp.o
+.PHONY : src/camera.o
+
+# target to build an object file
+src/camera.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/camera.cpp.o
+.PHONY : src/camera.cpp.o
+
+src/camera.i: src/camera.cpp.i
+.PHONY : src/camera.i
+
+# target to preprocess a source file
+src/camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/camera.cpp.i
+.PHONY : src/camera.cpp.i
+
+src/camera.s: src/camera.cpp.s
+.PHONY : src/camera.s
+
+# target to generate assembly for a file
+src/camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/camera.cpp.s
+.PHONY : src/camera.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +199,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... fpv_osd"
+	@echo "... imgui"
+	@echo "... src/camera.o"
+	@echo "... src/camera.i"
+	@echo "... src/camera.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
