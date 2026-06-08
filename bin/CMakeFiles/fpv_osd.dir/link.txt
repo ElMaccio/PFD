@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/fpv_osd.dir/link.d CMakeFiles/fpv_osd.dir/src/main.cpp.o -o fpv_osd  -lcamera -lcamera-base -lEGL -lGLESv2 -lgbm -ldrm -lpthread -lrt

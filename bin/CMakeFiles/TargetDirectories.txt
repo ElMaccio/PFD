@@ -1,0 +1,3 @@
+/home/orzel/israel/new_osd/bin/CMakeFiles/fpv_osd.dir
+/home/orzel/israel/new_osd/bin/CMakeFiles/edit_cache.dir
+/home/orzel/israel/new_osd/bin/CMakeFiles/rebuild_cache.dir
