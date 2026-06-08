@@ -18,11 +18,6 @@
 #include "octafont-regular.h"
 
 // ----------------------------------------------------------------------
-// stb_truetype implementation
-#define STB_TRUETYPE_IMPLEMENTATION
-#include "stb_truetype.h"
-
-// ----------------------------------------------------------------------
 // EGL extension definitions (if not already defined)
 #ifndef EGL_NO_IMAGE_KHR
 #define EGL_NO_IMAGE_KHR ((EGLImageKHR)0)
@@ -113,22 +108,6 @@ static drmEventContext evctx = {
         flip_pending = false;
     }
 };
-
-// ----------------------------------------------------------------------
-// Font atlas for stb_truetype (now with a dynamic character range)
-struct FontAtlas {
-    GLuint texture_id = 0;
-    int tex_width = 2048;          // Increased from 512 to 2048
-    int tex_height = 2048;          // Increased from 512 to 2048
-    int first_char = 0;             // First character code in the atlas
-    int num_chars = 0;              // Number of characters baked
-    stbtt_bakedchar cdata[256];      // Enough for any contiguous range
-} g_font_atlas;
-
-// Custom bitmap font for "2137"
-GLuint custom_number_texture = 0;
-int custom_number_tex_width = 0;
-int custom_number_tex_height = 0;
 
 struct GlyphInfo {
     float s0, t0, s1, t1;      // texture coordinates (t0 = bottom, t1 = top)
@@ -534,244 +513,6 @@ GLuint compile_shader(GLenum type, const char *src) {
 }
 
 // ----------------------------------------------------------------------
-// Initialize font atlas using stb_truetype – bakes only the characters in the given text.
-// Returns true on success, false otherwise.
-bool initFontAtlas(FontAtlas* atlas, const char* font_path, const char* text, float pixel_height) {
-    // Find the range of characters needed
-    int first = 127, last = 0;
-    for (const char* p = text; *p; ++p) {
-        unsigned char c = *p;
-        if (c < 32 || c > 126) continue; // ignore non-printable
-        if (c < first) first = c;
-        if (c > last) last = c;
-    }
-    if (first > last) {
-        std::cerr << "No printable characters in text." << std::endl;
-        return false;
-    }
-    int num_needed = last - first + 1;
-    std::cout << "Character range needed: " << first << " to " << last << " (total " << num_needed << ")" << std::endl;
-
-    FILE* font_file = fopen(font_path, "rb");
-    if (!font_file) {
-        std::cerr << "Failed to open font file: " << font_path << std::endl;
-        return false;
-    }
-    fseek(font_file, 0, SEEK_END);
-    size_t font_size = ftell(font_file);
-    fseek(font_file, 0, SEEK_SET);
-    unsigned char* font_buffer = (unsigned char*)malloc(font_size);
-    if (!font_buffer) {
-        std::cerr << "Failed to allocate font buffer." << std::endl;
-        fclose(font_file);
-        return false;
-    }
-    size_t read_bytes = fread(font_buffer, 1, font_size, font_file);
-    fclose(font_file);
-    if (read_bytes != font_size) {
-        std::cerr << "Failed to read entire font file." << std::endl;
-        free(font_buffer);
-        return false;
-    }
-
-    unsigned char* bitmap = (unsigned char*)calloc(atlas->tex_width * atlas->tex_height, 1);
-    if (!bitmap) {
-        std::cerr << "Failed to allocate bitmap for font atlas." << std::endl;
-        free(font_buffer);
-        return false;
-    }
-
-    int baked = stbtt_BakeFontBitmap(font_buffer, 0, pixel_height, bitmap,
-                                      atlas->tex_width, atlas->tex_height,
-                                      first, num_needed, atlas->cdata);
-    free(font_buffer);
-
-    std::cout << "stbtt_BakeFontBitmap baked " << baked << " characters (needed " << num_needed << ")" << std::endl;
-
-    if (baked <= 0) {
-        std::cerr << "Failed to bake any font characters." << std::endl;
-        free(bitmap);
-        return false;
-    }
-
-    if (baked < num_needed) {
-        std::cerr << "Warning: only " << baked << " characters fit. Some characters may be missing." << std::endl;
-        // We'll continue, but some glyphs will be missing.
-    }
-
-    // Store the range that was actually baked (may be less than requested)
-    atlas->first_char = first;
-    atlas->num_chars = baked;
-
-    // Print first few non-space characters for verification
-    for (int i = 1; i < 5 && i < baked; i++) {
-        std::cout << "char " << (first + i) << " ('" << char(first + i) << "'): x0=" << atlas->cdata[i].x0
-                  << " y0=" << atlas->cdata[i].y0
-                  << " x1=" << atlas->cdata[i].x1
-                  << " y1=" << atlas->cdata[i].y1 << std::endl;
-    }
-
-    glGenTextures(1, &atlas->texture_id);
-    glBindTexture(GL_TEXTURE_2D, atlas->texture_id);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, atlas->tex_width, atlas->tex_height,
-                 0, GL_ALPHA, GL_UNSIGNED_BYTE, bitmap);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-    free(bitmap);
-    std::cout << "Font atlas created, texture ID = " << atlas->texture_id << std::endl;
-    std::cout << "First baked char (index 0): x0=" << atlas->cdata[0].x0
-              << " y0=" << atlas->cdata[0].y0
-              << " x1=" << atlas->cdata[0].x1
-              << " y1=" << atlas->cdata[0].y1 << std::endl;
-    return true;
-}
-
-void drawTextCentered(const char* text, float y, float r, float g, float b, float a) {
-    if (!text || !*text) return;
-    if (g_font_atlas.texture_id == 0) {
-        std::cerr << "No font atlas available." << std::endl;
-        return;
-    }
-
-    std::cout << "drawTextCentered: \"" << text << "\"" << std::endl;
-
-    // Measure text width
-    float total_width = 0.0f;
-    float x_dummy = 0, y_dummy = 0;
-    for (const char* p = text; *p; ++p) {
-        unsigned char c = *p;
-        if (c < g_font_atlas.first_char || c >= g_font_atlas.first_char + g_font_atlas.num_chars) {
-            std::cerr << "Character '" << c << "' not in font atlas (code " << (int)c << ")" << std::endl;
-            continue;
-        }
-        stbtt_aligned_quad q;
-        stbtt_GetBakedQuad(g_font_atlas.cdata, g_font_atlas.tex_width, g_font_atlas.tex_height,
-                            c - g_font_atlas.first_char, &x_dummy, &y_dummy, &q, 1);
-        total_width += (q.x1 - q.x0);
-    }
-    float start_x = (screen_width - total_width) / 2.0f;
-
-    // Generate quads
-    std::vector<float> vertices;
-    float cursor_x = start_x;
-    float cursor_y = y;
-    for (const char* p = text; *p; ++p) {
-        unsigned char c = *p;
-        if (c < g_font_atlas.first_char || c >= g_font_atlas.first_char + g_font_atlas.num_chars) continue;
-        stbtt_aligned_quad q;
-        stbtt_GetBakedQuad(g_font_atlas.cdata, g_font_atlas.tex_width, g_font_atlas.tex_height,
-                            c - g_font_atlas.first_char, &cursor_x, &cursor_y, &q, 1);
-        float x0 = q.x0, y0 = q.y0, x1 = q.x1, y1 = q.y1;
-        // Triangle 1
-        vertices.push_back(x0); vertices.push_back(y0); vertices.push_back(q.s0); vertices.push_back(q.t0);
-        vertices.push_back(x1); vertices.push_back(y0); vertices.push_back(q.s1); vertices.push_back(q.t0);
-        vertices.push_back(x0); vertices.push_back(y1); vertices.push_back(q.s0); vertices.push_back(q.t1);
-        // Triangle 2
-        vertices.push_back(x1); vertices.push_back(y0); vertices.push_back(q.s1); vertices.push_back(q.t0);
-        vertices.push_back(x1); vertices.push_back(y1); vertices.push_back(q.s1); vertices.push_back(q.t1);
-        vertices.push_back(x0); vertices.push_back(y1); vertices.push_back(q.s0); vertices.push_back(q.t1);
-    }
-
-    if (vertices.empty()) {
-        std::cout << "  no vertices generated" << std::endl;
-        return;
-    }
-    std::cout << "  vertices count = " << vertices.size()/4 << std::endl;
-    std::cout << "  first quad: (" << vertices[0] << "," << vertices[1] << ") - ("
-              << vertices[4] << "," << vertices[5] << ")" << std::endl;
-
-    // Upload to VBO
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_text);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_DYNAMIC_DRAW);
-    CHECK_GL("vbo_text upload");
-
-    float proj[16] = {
-        2.0f/screen_width, 0, 0, 0,
-        0, -2.0f/screen_height, 0, 0,
-        0, 0, 1, 0,
-        -1, 1, 0, 1
-    };
-
-    glUseProgram(program_text);
-    glUniformMatrix4fv(u_text_proj_loc, 1, GL_FALSE, proj);
-    glUniform1i(u_text_tex_loc, 0);
-    glUniform4f(u_text_color_loc, r, g, b, a);
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, g_font_atlas.texture_id);
-
-    GLint a_pos = glGetAttribLocation(program_text, "a_pos");
-    GLint a_tex = glGetAttribLocation(program_text, "a_tex");
-    std::cout << "  a_pos=" << a_pos << " a_tex=" << a_tex << std::endl;
-    glEnableVertexAttribArray(a_pos);
-    glEnableVertexAttribArray(a_tex);
-    glVertexAttribPointer(a_pos, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-    glVertexAttribPointer(a_tex, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-
-    glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 4);
-    CHECK_GL("glDrawArrays text");
-
-    glDisableVertexAttribArray(a_pos);
-    glDisableVertexAttribArray(a_tex);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glUseProgram(0);
-}
-
-void createCustomNumberTexture() {
-    OctafontRegular font;
-    const char* digits = "2137";
-    const int num_digits = 4;
-    const int gap = 1;
-    const int font_height = 8;   // known from the font
-
-    int widths[4];
-    int total_width = 0;
-    for (int i = 0; i < num_digits; ++i) {
-        widths[i] = font.get_width(digits[i]);
-        total_width += widths[i];
-    }
-    total_width += (num_digits - 1) * gap;
-
-    std::vector<unsigned char> bitmap(total_width * font_height, 0);
-
-    int x_offset = 0;
-    for (int d = 0; d < num_digits; ++d) {
-        char c = digits[d];
-        int w = widths[d];
-        for (int col = 0; col < w; ++col) {
-            uint8_t column = font.get_octet(c, col);   // each bit is a pixel (0 = top)
-            for (int row = 0; row < font_height; ++row) {
-                int bit = (column >> row) & 1;
-                if (bit) {
-                    int data_row = row;
-                    int idx = data_row * total_width + (x_offset + col);
-                    bitmap[idx] = 255;
-                }
-            }
-        }
-        x_offset += w + gap;
-    }
-
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glGenTextures(1, &custom_number_texture);
-    glBindTexture(GL_TEXTURE_2D, custom_number_texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, total_width, font_height, 0,
-                 GL_ALPHA, GL_UNSIGNED_BYTE, bitmap.data());
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-    custom_number_tex_width = total_width;
-    custom_number_tex_height = font_height;
-
-    std::cout << "Custom number texture created: " << total_width << "x" << font_height << std::endl;
-}
-
-// ----------------------------------------------------------------------
 // Initialize OpenGL ES
 void init_gl() {
     glViewport(0, 0, screen_width, screen_height);
@@ -912,16 +653,6 @@ void init_gl() {
     // Create VBO for overlay drawing (dynamic lines etc.)
     glGenBuffers(1, &vbo_overlay);
 
-    // Load stb_truetype font atlas (optional)
-    const char* font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf";
-    const char* sample_text = "Hello World";
-    if (!initFontAtlas(&g_font_atlas, font_path, sample_text, 24.0f)) {
-        std::cerr << "Failed to load font. Text will not be displayed." << std::endl;
-    }
-
-    // Create the static "2137" texture (kept for reference, but not used)
-    createCustomNumberTexture();
-
     // NEW: Build the pixel font atlas for dynamic digits
     buildPixelFontAtlas();
 
@@ -1030,9 +761,6 @@ void draw_pfd() {
     float x = screen_width - 200 - text_width - margin;   // left of right line
     float y = (screen_height - PIXEL_FONT_HEIGHT * scale) / 2.0f;   // vertically centered
     drawPixelText("THE CURRENT NUMBER IS: " + number, x, y, scale, 1.0f, 1.0f, 1.0f, 1.0f);
-
-    // The old static number is commented out
-    // drawCustomNumberCentered();
 
     glDisable(GL_BLEND);
 }
@@ -1229,12 +957,6 @@ void cleanup() {
         if (pair.second.egl_image != EGL_NO_IMAGE_KHR)
             eglDestroyImageKHR(egl_display, pair.second.egl_image);
     }
-
-    if (g_font_atlas.texture_id)
-        glDeleteTextures(1, &g_font_atlas.texture_id);
-
-    if (custom_number_texture)
-        glDeleteTextures(1, &custom_number_texture);
 
     // NEW: delete pixel font atlas
     if (pixel_font_atlas)
