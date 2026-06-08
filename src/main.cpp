@@ -181,7 +181,7 @@ GLuint vbo_text = 0;          // for dynamic text quads
 // ----------------------------------------------------------------------
 // Build a texture atlas containing all required characters (digits 0‑9).
 void buildPixelFontAtlas() {
-    const char* chars = "0123456789ABC";   // only digits needed for "1234"
+    const char* chars = "0123456789QWERTYUIOPASDFGHJKLZXCVBNM:";   // only digits needed for "1234"
     const int count = strlen(chars);
     int total_width = 0;
     int max_width = 0;
@@ -275,41 +275,54 @@ void drawPixelText(const std::string& text, float x, float y, float scale,
     std::vector<float> vertices;
     float cursor_x = x;
 
-    for (char c : text) {
-        auto it = pixel_glyph_map.find(c);
-        if (it == pixel_glyph_map.end()) continue;
+    for (char character : text) {
+        auto glyphIterator = pixel_glyph_map.find(character);
+        if (glyphIterator == pixel_glyph_map.end()) continue;
 
-        const GlyphInfo& g = it->second;
-        float w = g.width * scale;
-        float h = PIXEL_FONT_HEIGHT * scale;
+        const GlyphInfo& glyph = glyphIterator->second;
 
-        // Quad corners (screen coordinates, y=0 at top)
-        float x0 = cursor_x;
-        float y0 = y;
-        float x1 = cursor_x + w;
-        float y1 = y + h;
+        float glyphWidth  = glyph.width * scale;
+        float glyphHeight = PIXEL_FONT_HEIGHT * scale;
+
+        // Quad corners (screen coordinates, y = 0 at top)
+        float leftX   = cursor_x;
+        float topY    = y;
+        float rightX  = cursor_x + glyphWidth;
+        float bottomY = y + glyphHeight;
 
         // Triangle 1
-        vertices.push_back(x0); vertices.push_back(y0);
-        vertices.push_back(g.s0); vertices.push_back(g.t0);
+        vertices.push_back(leftX);
+        vertices.push_back(topY);
+        vertices.push_back(glyph.s0);
+        vertices.push_back(glyph.t0);
 
-        vertices.push_back(x1); vertices.push_back(y0);
-        vertices.push_back(g.s1); vertices.push_back(g.t0);
+        vertices.push_back(rightX);
+        vertices.push_back(topY);
+        vertices.push_back(glyph.s1);
+        vertices.push_back(glyph.t0);
 
-        vertices.push_back(x0); vertices.push_back(y1);
-        vertices.push_back(g.s0); vertices.push_back(g.t1);
+        vertices.push_back(leftX);
+        vertices.push_back(bottomY);
+        vertices.push_back(glyph.s0);
+        vertices.push_back(glyph.t1);
 
         // Triangle 2
-        vertices.push_back(x1); vertices.push_back(y0);
-        vertices.push_back(g.s1); vertices.push_back(g.t0);
+        vertices.push_back(rightX);
+        vertices.push_back(topY);
+        vertices.push_back(glyph.s1);
+        vertices.push_back(glyph.t0);
 
-        vertices.push_back(x1); vertices.push_back(y1);
-        vertices.push_back(g.s1); vertices.push_back(g.t1);
+        vertices.push_back(rightX);
+        vertices.push_back(bottomY);
+        vertices.push_back(glyph.s1);
+        vertices.push_back(glyph.t1);
 
-        vertices.push_back(x0); vertices.push_back(y1);
-        vertices.push_back(g.s0); vertices.push_back(g.t1);
+        vertices.push_back(leftX);
+        vertices.push_back(bottomY);
+        vertices.push_back(glyph.s0);
+        vertices.push_back(glyph.t1);
 
-        cursor_x += w;
+        cursor_x += glyphWidth;
     }
 
     if (vertices.empty()) return;
@@ -1016,7 +1029,7 @@ void draw_pfd() {
     float margin = 10.0f;                    // "a tiny bit"
     float x = screen_width - 200 - text_width - margin;   // left of right line
     float y = (screen_height - PIXEL_FONT_HEIGHT * scale) / 2.0f;   // vertically centered
-    //drawPixelText(number, x, y, scale, 1.0f, 1.0f, 1.0f, 1.0f);
+    drawPixelText("THE CURRENT NUMBER IS: " + number, x, y, scale, 1.0f, 1.0f, 1.0f, 1.0f);
 
     // The old static number is commented out
     // drawCustomNumberCentered();
