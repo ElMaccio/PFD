@@ -35,7 +35,8 @@ link_directories(
 
 add_executable(fpv_osd src/main.cpp
                         src/camera.cpp
-                        src/shaders.cpp)
+                        src/shaders.cpp
+                        src/instruments.cpp)
 
 target_link_libraries(fpv_osd
     ${LIBCAMERA_LIBRARIES}
