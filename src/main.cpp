@@ -23,6 +23,11 @@
 //DEBUG ONLY
 float counter = 0.0f;
 
+struct Color {
+    float r, g, b, a;
+    Color(float r, float g, float b, float a = 1.0f) : r(r), g(g), b(b), a(a) {}
+};
+
 // ----------------------------------------------------------------------
 // EGL extension definitions (if not already defined)
 #ifndef EGL_NO_IMAGE_KHR
@@ -212,8 +217,7 @@ float getPixelTextWidth(const std::string& text, float scale) {
     return width;
 }
 
-void drawPixelText(const std::string& text, float x, float y, float scale,
-                   float r, float g, float b, float a) {
+void drawPixelText(const std::string& text, float x, float y, float scale, Color color) {
     if (text.empty() || pixel_font_atlas == 0 || !g_shaders) return;
 
     std::vector<float> vertices;
@@ -266,7 +270,7 @@ void drawPixelText(const std::string& text, float x, float y, float scale,
     };
     g_shaders->setTextProjection(proj);
     g_shaders->setTextureUnit(0);
-    g_shaders->setTextColor(r, g, b, a);
+    g_shaders->setTextColor(color.r, color.g, color.b, color.a);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, pixel_font_atlas);
@@ -287,7 +291,48 @@ void drawPixelText(const std::string& text, float x, float y, float scale,
     glUseProgram(0);
 }
 
-void drawPixelTextWithOutline(const std::string& text, float x, float y, float scale, float r, float g, float b, float a, float outline_r, float outline_g, float outline_b, float outline_a, int outline_thickness = 1) {
+void drawPixelTextWithBackground(const std::string& text, float x, float y, float scale, Color color = Color(1.0f, 1.0f, 1.0f, 1.0f), Color background_color = Color(0.0f, 0.0f, 0.0f, 1.0f), int margin = 1)
+{
+    float text_width = getPixelTextWidth(text, scale);
+    float text_height = PIXEL_FONT_HEIGHT * scale;
+
+    // Draw background rectangle
+    std::vector<float> bg_vertices = {
+        x - margin, y - margin,
+        x + text_width + margin, y - margin,
+        x + text_width + margin, y + text_height + margin,
+        x - margin, y + text_height + margin
+    };
+
+    g_shaders->useOverlay();
+    g_shaders->setOverlayProjection({
+        2.0f / screen_width, 0, 0, 0,
+        0, -2.0f / screen_height, 0, 0,
+        0, 0, 1, 0,
+        -1, 1, 0, 1
+    });
+    g_shaders->setOverlayColor(background_color.r, background_color.g,
+                               background_color.b, background_color.a);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_overlay);
+    glBufferData(GL_ARRAY_BUFFER, bg_vertices.size() * sizeof(float),
+                 bg_vertices.data(), GL_DYNAMIC_DRAW);
+
+    GLint a_pos = g_shaders->getOverlayPosAttr();
+    glEnableVertexAttribArray(a_pos);
+    glVertexAttribPointer(a_pos, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
+    glDisableVertexAttribArray(a_pos);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glUseProgram(0);
+
+    // Draw the text on top
+    drawPixelText(text, x, y, scale, color);
+}
+
+void drawPixelTextWithOutline(const std::string& text, float x, float y, float scale, Color color = Color(1.0f, 1.0f, 1.0f, 1.0f), Color outline_color = Color(0.0f, 0.0f, 0.0f, 1.0f), int outline_thickness = 1) {
     std::vector<std::pair<float, float>> offsets;
     for (int dx = -outline_thickness; dx <= outline_thickness; ++dx) {
         for (int dy = -outline_thickness; dy <= outline_thickness; ++dy) {
@@ -300,10 +345,10 @@ void drawPixelTextWithOutline(const std::string& text, float x, float y, float s
     // Draw outline passes
     for (auto& off : offsets) {
         drawPixelText(text, x + off.first, y + off.second, scale,
-                      outline_r, outline_g, outline_b, outline_a);
+                      outline_color);
     }
     // Draw main text
-    drawPixelText(text, x, y, scale, r, g, b, a);
+    drawPixelText(text, x, y, scale, color);
 }
 
 std::string formatNumber(double value, int int_precision, int decimal_precision) {
@@ -551,7 +596,8 @@ void draw_pfd() {
     counter += 0.001f;
 
     std::string text = formatNumber(counter, 3, 2);
-    drawPixelTextWithOutline(text, screen_width / 2, screen_height / 2, 4.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 3);
+    drawPixelTextWithOutline(text, screen_width / 2, screen_height / 2 - 50, 4.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 3);
+    drawPixelTextWithBackground(text, screen_width / 2, screen_height / 2 + 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 0.5f), 5);
 
     glDisable(GL_BLEND);
 }

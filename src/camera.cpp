@@ -42,6 +42,9 @@ void MCamera::init_camera() {
     for (unsigned int i = 0; i < buffers.size(); ++i) {
         std::unique_ptr<Request> req = camera->createRequest();
         req->addBuffer(video_stream, buffers[i].get());
+        // Queue the request so the camera can start filling the buffer,
+        // then keep ownership in the requests vector so the Request stays alive.
+        camera->queueRequest(req.get());
         requests.push_back(std::move(req));
 
         // Wypełnij mapę fd -> FrameBuffer*
