@@ -344,6 +344,50 @@ void drawPixelText(const std::string& text, float x, float y, float scale,
     glUseProgram(0);
 }
 
+void drawPixelTextWithOutline(const std::string& text, float x, float y, float scale, float r, float g, float b, float a, float outline_r, float outline_g, float outline_b, float outline_a, int outline_thickness = 1) {
+    std::vector<std::pair<float, float>> offsets;
+    for (int dx = -outline_thickness; dx <= outline_thickness; ++dx) {
+        for (int dy = -outline_thickness; dy <= outline_thickness; ++dy) {
+            if (dx == 0 && dy == 0) continue;
+            if (abs(dx) + abs(dy) <= outline_thickness * 2) {
+                offsets.emplace_back(dx, dy);
+            }
+        }
+    }
+    // Draw outline passes
+    for (auto& off : offsets) {
+        drawPixelText(text, x + off.first, y + off.second, scale,
+                      outline_r, outline_g, outline_b, outline_a);
+    }
+    // Draw main text
+    drawPixelText(text, x, y, scale, r, g, b, a);
+}
+
+std::string formatNumber(double value, int total_width, int decimal_places) {
+    // Round to avoid floating point artifacts
+    double factor = std::pow(10.0, decimal_places);
+    value = std::round(value * factor) / factor;
+
+    std::ostringstream ss;
+    ss << std::fixed << std::setprecision(decimal_places) << value;
+    std::string num_str = ss.str();
+
+    // Count digits before decimal (including sign if negative)
+    std::string::size_type dot_pos = num_str.find('.');
+    int digits_before = (dot_pos == std::string::npos) ? num_str.length() : dot_pos;
+    if (value < 0) digits_before--; // minus sign doesn't count as digit for padding
+
+    int leading_zeros_needed = total_width - digits_before;
+    if (leading_zeros_needed > 0) {
+        std::string leading = std::string(leading_zeros_needed, '0');
+        if (value < 0)
+            num_str = "-" + leading + num_str.substr(1);
+        else
+            num_str = leading + num_str;
+    }
+    return num_str;
+}
+
 // ----------------------------------------------------------------------
 // Find DRM device with a connected display
 static int find_drm_device() {
@@ -762,6 +806,7 @@ void draw_pfd() {
     float x = screen_width - 200 - text_width - margin;   // left of right line
     float y = (screen_height - PIXEL_FONT_HEIGHT * scale) / 2.0f;   // vertically centered
     drawPixelText(number, x, y, scale, 1.0f, 1.0f, 1.0f, 1.0f);
+    drawPixelText(number, x, y + 250, scale, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
 
     glDisable(GL_BLEND);
 }
@@ -1020,6 +1065,10 @@ void cleanup() {
 int main() {
     init_display();
     init_gl();
+    std::cout << formatNumber(1.1f, 4, 1) << "\n";
+    std::cout << formatNumber(1.1567f, 4, 1) << "\n";
+    std::cout << formatNumber(100.25f, 4, 1) << "\n";
+    std::cout << formatNumber(15f, 4, 1) << "\n";
     run();  // never returns normally
     cleanup();
     return 0;
