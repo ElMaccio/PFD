@@ -202,7 +202,33 @@ void buildPixelFontAtlas() {
 
     for (int i = 0; i < numbers_count; i++)
     {
-        
+        char digit = num_chars[i];
+        int original_width = getFont().get_width(digit);
+        int left_padding = NUMBER_WIDTH - original_width;
+
+        for(int col = 0; col < NUMBER_WIDTH; ++col) {
+            uint8_t column = 0;
+            if(col >= left_padding) {
+                column = getFont().get_octet(digit, col - left_padding);
+            }
+            for(int row = 0; row < PIXEL_FONT_HEIGHT; ++row) {
+                if ((column >> row) & 1) {
+                    int idx = row * pixel_atlas_width + (x_offset + col);
+                    bitmap[idx] = 255;
+            }
+            }
+        }
+
+        GlyphInfo info;
+        info.width = NUMBER_WIDTH;
+        info.s0 = (float)x_offset / pixel_atlas_width;
+        info.s1 = (float)(x_offset + NUMBER_WIDTH) / pixel_atlas_width;
+        info.t0 = 1.0f - (float)PIXEL_FONT_HEIGHT / pixel_atlas_height;
+        info.t1 = 1.0f;
+
+        pixel_glyph_map[digit] = info;
+
+        x_offset += NUMBER_WIDTH + 1;
     }
 
     glGenTextures(1, &pixel_font_atlas);
