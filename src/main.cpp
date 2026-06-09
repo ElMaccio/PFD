@@ -20,6 +20,8 @@
 #include "octafont-regular.h"
 #include "shaders.h"
 
+#define NUMBER_WIDTH 5
+
 //DEBUG ONLY
 float counter = 0.0f;
 
@@ -147,7 +149,8 @@ GLuint vbo_text = 0;
 // ----------------------------------------------------------------------
 // Build texture atlas (unchanged)
 void buildPixelFontAtlas() {
-    const char* chars = "0123456789ABCDEF.";
+    const char* num_chars = "0123456789";
+    const char* chars = "ABCDEFGHIJKLMNOPRSTUWYXZQ.abcdefghijklmnoprstuwyxqz'!()*,/\\:";
     const int count = strlen(chars);
     int total_width = 0;
     int max_width = 0;
@@ -157,6 +160,11 @@ void buildPixelFontAtlas() {
         total_width += w + 1;
         if (w > max_width) max_width = w;
     }
+
+    int numbers_count = strlen(num_chars);
+
+    total_width += numbers_count * NUMBER_WIDTH + 1;
+
     total_width -= 1;
 
     pixel_atlas_width = 1;
@@ -192,6 +200,37 @@ void buildPixelFontAtlas() {
         x_offset += w + 1;
     }
 
+    for (int i = 0; i < numbers_count; i++)
+    {
+        char digit = num_chars[i];
+        int original_width = getFont().get_width(digit);
+        int left_padding = NUMBER_WIDTH - original_width;
+
+        for(int col = 0; col < NUMBER_WIDTH; ++col) {
+            uint8_t column = 0;
+            if(col >= left_padding) {
+                column = getFont().get_octet(digit, col - left_padding);
+            }
+            for(int row = 0; row < PIXEL_FONT_HEIGHT; ++row) {
+                if ((column >> row) & 1) {
+                    int idx = row * pixel_atlas_width + (x_offset + col);
+                    bitmap[idx] = 255;
+            }
+            }
+        }
+
+        GlyphInfo info;
+        info.width = NUMBER_WIDTH;
+        info.s0 = (float)x_offset / pixel_atlas_width;
+        info.s1 = (float)(x_offset + NUMBER_WIDTH) / pixel_atlas_width;
+        info.t0 = 1.0f - (float)PIXEL_FONT_HEIGHT / pixel_atlas_height;
+        info.t1 = 1.0f;
+
+        pixel_glyph_map[digit] = info;
+
+        x_offset += NUMBER_WIDTH + 1;
+    }
+
     glGenTextures(1, &pixel_font_atlas);
     glBindTexture(GL_TEXTURE_2D, pixel_font_atlas);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -224,6 +263,11 @@ void drawPixelText(const std::string& text, float x, float y, float scale, Color
     float cursor_x = x;
 
     for (char character : text) {
+        if(character == ' ') {
+            cursor_x += scale * 4.0f;
+            continue;
+        }
+
         auto it = pixel_glyph_map.find(character);
         if (it == pixel_glyph_map.end()) continue;
         const GlyphInfo& glyph = it->second;
@@ -305,12 +349,16 @@ void drawPixelTextWithBackground(const std::string& text, float x, float y, floa
     };
 
     g_shaders->useOverlay();
-    g_shaders->setOverlayProjection({
+
+    float proj[16] = {
         2.0f / screen_width, 0, 0, 0,
         0, -2.0f / screen_height, 0, 0,
         0, 0, 1, 0,
         -1, 1, 0, 1
-    });
+    };
+
+    g_shaders->setOverlayProjection(proj);
+
     g_shaders->setOverlayColor(background_color.r, background_color.g,
                                background_color.b, background_color.a);
 
@@ -596,8 +644,18 @@ void draw_pfd() {
     counter += 0.001f;
 
     std::string text = formatNumber(counter, 3, 2);
-    drawPixelTextWithOutline(text, screen_width / 2, screen_height / 2 - 50, 4.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 3);
+    drawPixelTextWithOutline(text, screen_width / 2, screen_height / 2 - 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
     drawPixelTextWithBackground(text, screen_width / 2, screen_height / 2 + 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 0.5f), 5);
+
+    drawPixelTextWithOutline("LOREM IPSUM murzynek Bambo byl czarny cos tam cos tam !,'/()*:\\", 25, 25, 5.0f);
+
+    for (int i = 0; i < 10; i++)
+{
+    char digit_char = '0' + i;
+    int width = getFont().get_width(digit_char);
+    std::string output = formatNumber(i, 1, 0) + ": " + std::to_string(width) + " pixels wide";
+    drawPixelTextWithOutline(output, 25, 25 + i * 100, 5.0f);
+} 
 
     glDisable(GL_BLEND);
 }
