@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(PkgConfig REQUIRED)
+find_library(PIGPIO_LIB pigpio REQUIRED)
 
 # libcamera
 pkg_check_modules(LIBCAMERA REQUIRED libcamera)
@@ -48,4 +49,5 @@ target_link_libraries(fpv_osd
     imgui
     pthread
     rt
+    pigpio
 )

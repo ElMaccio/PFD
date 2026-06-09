@@ -5,6 +5,7 @@ fpv_osd: \
   CMakeFiles/fpv_osd.dir/src/main.cpp.o \
   CMakeFiles/fpv_osd.dir/src/camera.cpp.o \
   CMakeFiles/fpv_osd.dir/src/shaders.cpp.o \
+  CMakeFiles/fpv_osd.dir/src/instruments.cpp.o \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libcamera.so \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libcamera-base.so \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libEGL.so \
@@ -14,6 +15,7 @@ fpv_osd: \
   src/imgui/libimgui.so \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libpthread.a \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/librt.a \
+  /usr/local/lib/libpigpio.so \
   /usr/lib/gcc/aarch64-linux-gnu/14/libstdc++.so \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libm.so \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libm.so \
@@ -84,6 +86,8 @@ CMakeFiles/fpv_osd.dir/src/camera.cpp.o:
 
 CMakeFiles/fpv_osd.dir/src/shaders.cpp.o:
 
+CMakeFiles/fpv_osd.dir/src/instruments.cpp.o:
+
 /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libcamera.so:
 
 /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libcamera-base.so:
@@ -101,6 +105,8 @@ src/imgui/libimgui.so:
 /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libpthread.a:
 
 /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/librt.a:
+
+/usr/local/lib/libpigpio.so:
 
 /usr/lib/gcc/aarch64-linux-gnu/14/libstdc++.so:
 

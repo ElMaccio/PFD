@@ -166,6 +166,30 @@ src/camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
+src/instruments.o: src/instruments.cpp.o
+.PHONY : src/instruments.o
+
+# target to build an object file
+src/instruments.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/instruments.cpp.o
+.PHONY : src/instruments.cpp.o
+
+src/instruments.i: src/instruments.cpp.i
+.PHONY : src/instruments.i
+
+# target to preprocess a source file
+src/instruments.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/instruments.cpp.i
+.PHONY : src/instruments.cpp.i
+
+src/instruments.s: src/instruments.cpp.s
+.PHONY : src/instruments.s
+
+# target to generate assembly for a file
+src/instruments.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/instruments.cpp.s
+.PHONY : src/instruments.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -227,6 +251,9 @@ help:
 	@echo "... src/camera.o"
 	@echo "... src/camera.i"
 	@echo "... src/camera.s"
+	@echo "... src/instruments.o"
+	@echo "... src/instruments.i"
+	@echo "... src/instruments.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
