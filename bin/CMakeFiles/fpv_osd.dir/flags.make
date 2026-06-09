@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/include/libcamera -I/usr/include/libdrm -I/home/orzel/israel/PrimaryFlightDisplay/src/imgui/src -I/home/orzel/israel/PrimaryFlightDisplay/src/imgui/backends
+CXX_INCLUDES = -I/usr/include/libcamera -I/usr/include/libdrm -I/home/orzel/PrimaryFlightDisplay/src/imgui/src -I/home/orzel/PrimaryFlightDisplay/src/imgui/backends
 
 CXX_FLAGS = -std=gnu++17
 

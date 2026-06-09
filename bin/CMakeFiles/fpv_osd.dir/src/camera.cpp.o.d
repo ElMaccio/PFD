@@ -1,7 +1,6 @@
 CMakeFiles/fpv_osd.dir/src/camera.cpp.o: \
- /home/orzel/israel/PrimaryFlightDisplay/src/camera.cpp \
- /usr/include/stdc-predef.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/camera.h \
+ /home/orzel/PrimaryFlightDisplay/src/camera.cpp \
+ /usr/include/stdc-predef.h /home/orzel/PrimaryFlightDisplay/src/camera.h \
  /usr/include/libcamera/libcamera/libcamera.h \
  /usr/include/libcamera/libcamera/camera.h \
  /usr/include/c++/14/initializer_list \

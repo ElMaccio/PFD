@@ -4,6 +4,16 @@
 #include <GLES2/gl2.h>
 #include <string>
 
+
+#define CHECK_GL(msg) do { \
+    GLenum err = glGetError(); \
+    if (err != GL_NO_ERROR) { \
+        std::cerr << msg << " (GL error: 0x" << std::hex << err << ")" << std::endl; \
+        exit(1); \
+    } \
+} while(0)
+
+
 class Shaders {
 public:
     Shaders();

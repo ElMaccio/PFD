@@ -1,8 +1,8 @@
 src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o: \
- /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp \
+ /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp \
  /usr/include/stdc-predef.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imconfig.h \
+ /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui.h \
+ /home/orzel/PrimaryFlightDisplay/src/imgui/src/imconfig.h \
  /usr/lib/gcc/aarch64-linux-gnu/14/include/float.h \
  /usr/lib/gcc/aarch64-linux-gnu/14/include/stdarg.h \
  /usr/lib/gcc/aarch64-linux-gnu/14/include/stddef.h /usr/include/string.h \
@@ -17,7 +17,7 @@ src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o: \
  /usr/include/aarch64-linux-gnu/bits/types/locale_t.h \
  /usr/include/aarch64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h /usr/include/assert.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_internal.h \
+ /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_internal.h \
  /usr/include/stdio.h /usr/include/aarch64-linux-gnu/bits/types.h \
  /usr/include/aarch64-linux-gnu/bits/typesizes.h \
  /usr/include/aarch64-linux-gnu/bits/time64.h \
@@ -115,5 +115,5 @@ src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o: \
  /usr/include/aarch64-linux-gnu/bits/wchar.h \
  /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/aarch64-linux-gnu/bits/stdint-least.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imstb_rectpack.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imstb_truetype.h
+ /home/orzel/PrimaryFlightDisplay/src/imgui/src/imstb_rectpack.h \
+ /home/orzel/PrimaryFlightDisplay/src/imgui/src/imstb_truetype.h

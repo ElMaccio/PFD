@@ -4,6 +4,7 @@ fpv_osd: \
   /usr/lib/gcc/aarch64-linux-gnu/14/crtbeginS.o \
   CMakeFiles/fpv_osd.dir/src/main.cpp.o \
   CMakeFiles/fpv_osd.dir/src/camera.cpp.o \
+  CMakeFiles/fpv_osd.dir/src/shaders.cpp.o \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libcamera.so \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libcamera-base.so \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libEGL.so \
@@ -80,6 +81,8 @@ fpv_osd: \
 CMakeFiles/fpv_osd.dir/src/main.cpp.o:
 
 CMakeFiles/fpv_osd.dir/src/camera.cpp.o:
+
+CMakeFiles/fpv_osd.dir/src/shaders.cpp.o:
 
 /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/libcamera.so:
 

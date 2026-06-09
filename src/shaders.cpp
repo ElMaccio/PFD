@@ -1,15 +1,6 @@
 #include "shaders.h"
 #include <iostream>
 
-// Error checking macro (you can move this to a common header)
-#define CHECK_GL(msg) do { \
-    GLenum err = glGetError(); \
-    if (err != GL_NO_ERROR) { \
-        std::cerr << msg << " (GL error: 0x" << std::hex << err << ")" << std::endl; \
-        exit(1); \
-    } \
-} while(0)
-
 // ----------------------------------------------------------------------
 // Shader source strings (copied from your original code)
 static const char* vs_camera = R"(

@@ -4,6 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/fpv_osd.dir/src/camera.cpp.o.d"
   "CMakeFiles/fpv_osd.dir/src/main.cpp.o"
   "CMakeFiles/fpv_osd.dir/src/main.cpp.o.d"
+  "CMakeFiles/fpv_osd.dir/src/shaders.cpp.o"
+  "CMakeFiles/fpv_osd.dir/src/shaders.cpp.o.d"
   "fpv_osd"
   "fpv_osd.pdb"
 )

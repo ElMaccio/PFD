@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/orzel/israel/PrimaryFlightDisplay
+CMAKE_SOURCE_DIR = /home/orzel/PrimaryFlightDisplay
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/orzel/israel/PrimaryFlightDisplay/bin
+CMAKE_BINARY_DIR = /home/orzel/PrimaryFlightDisplay/bin
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles /home/orzel/israel/PrimaryFlightDisplay/bin//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/PrimaryFlightDisplay/bin/CMakeFiles /home/orzel/PrimaryFlightDisplay/bin//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orzel/PrimaryFlightDisplay/bin/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -190,6 +190,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/shaders.o: src/shaders.cpp.o
+.PHONY : src/shaders.o
+
+# target to build an object file
+src/shaders.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/shaders.cpp.o
+.PHONY : src/shaders.cpp.o
+
+src/shaders.i: src/shaders.cpp.i
+.PHONY : src/shaders.i
+
+# target to preprocess a source file
+src/shaders.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/shaders.cpp.i
+.PHONY : src/shaders.cpp.i
+
+src/shaders.s: src/shaders.cpp.s
+.PHONY : src/shaders.s
+
+# target to generate assembly for a file
+src/shaders.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fpv_osd.dir/build.make CMakeFiles/fpv_osd.dir/src/shaders.cpp.s
+.PHONY : src/shaders.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -206,6 +230,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/shaders.o"
+	@echo "... src/shaders.i"
+	@echo "... src/shaders.s"
 .PHONY : help
 
 

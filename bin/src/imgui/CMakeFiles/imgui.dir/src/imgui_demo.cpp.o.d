@@ -1,8 +1,8 @@
 src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o: \
- /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp \
+ /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp \
  /usr/include/stdc-predef.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imconfig.h \
+ /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui.h \
+ /home/orzel/PrimaryFlightDisplay/src/imgui/src/imconfig.h \
  /usr/lib/gcc/aarch64-linux-gnu/14/include/float.h \
  /usr/lib/gcc/aarch64-linux-gnu/14/include/stdarg.h \
  /usr/lib/gcc/aarch64-linux-gnu/14/include/stddef.h /usr/include/string.h \

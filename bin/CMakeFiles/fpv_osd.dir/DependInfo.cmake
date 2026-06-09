@@ -8,8 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/orzel/israel/PrimaryFlightDisplay/src/camera.cpp" "CMakeFiles/fpv_osd.dir/src/camera.cpp.o" "gcc" "CMakeFiles/fpv_osd.dir/src/camera.cpp.o.d"
-  "/home/orzel/israel/PrimaryFlightDisplay/src/main.cpp" "CMakeFiles/fpv_osd.dir/src/main.cpp.o" "gcc" "CMakeFiles/fpv_osd.dir/src/main.cpp.o.d"
+  "/home/orzel/PrimaryFlightDisplay/src/camera.cpp" "CMakeFiles/fpv_osd.dir/src/camera.cpp.o" "gcc" "CMakeFiles/fpv_osd.dir/src/camera.cpp.o.d"
+  "/home/orzel/PrimaryFlightDisplay/src/main.cpp" "CMakeFiles/fpv_osd.dir/src/main.cpp.o" "gcc" "CMakeFiles/fpv_osd.dir/src/main.cpp.o.d"
+  "/home/orzel/PrimaryFlightDisplay/src/shaders.cpp" "CMakeFiles/fpv_osd.dir/src/shaders.cpp.o" "gcc" "CMakeFiles/fpv_osd.dir/src/shaders.cpp.o.d"
   "" "fpv_osd" "gcc" "CMakeFiles/fpv_osd.dir/link.d"
   )
 

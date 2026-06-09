@@ -1,4 +1,4 @@
-# Install script for directory: /home/orzel/israel/PrimaryFlightDisplay
+# Install script for directory: /home/orzel/PrimaryFlightDisplay
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,14 +44,14 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui/cmake_install.cmake")
+  include("/home/orzel/PrimaryFlightDisplay/bin/src/imgui/cmake_install.cmake")
 
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/orzel/israel/PrimaryFlightDisplay/bin/install_local_manifest.txt"
+  file(WRITE "/home/orzel/PrimaryFlightDisplay/bin/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -67,6 +67,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/orzel/israel/PrimaryFlightDisplay/bin/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/home/orzel/PrimaryFlightDisplay/bin/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

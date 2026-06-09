@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/orzel/israel/PrimaryFlightDisplay
+CMAKE_SOURCE_DIR = /home/orzel/PrimaryFlightDisplay
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/orzel/israel/PrimaryFlightDisplay/bin
+CMAKE_BINARY_DIR = /home/orzel/PrimaryFlightDisplay/bin
 
 # Include any dependencies generated for this target.
 include src/imgui/CMakeFiles/imgui.dir/depend.make
@@ -73,88 +73,88 @@ src/imgui/CMakeFiles/imgui.dir/codegen:
 .PHONY : src/imgui/CMakeFiles/imgui.dir/codegen
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o: src/imgui/CMakeFiles/imgui.dir/flags.make
-src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o: /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui.cpp
+src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o: /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui.cpp
 src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o: src/imgui/CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o -MF CMakeFiles/imgui.dir/src/imgui.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui.cpp.o -c /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o"
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o -MF CMakeFiles/imgui.dir/src/imgui.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui.cpp.o -c /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui.cpp
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/imgui.dir/src/imgui.cpp.i"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui.cpp > CMakeFiles/imgui.dir/src/imgui.cpp.i
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui.cpp > CMakeFiles/imgui.dir/src/imgui.cpp.i
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/src/imgui.cpp.s"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui.cpp -o CMakeFiles/imgui.dir/src/imgui.cpp.s
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui.cpp -o CMakeFiles/imgui.dir/src/imgui.cpp.s
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o: src/imgui/CMakeFiles/imgui.dir/flags.make
-src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o: /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp
+src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o: /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp
 src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o: src/imgui/CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o -MF CMakeFiles/imgui.dir/src/imgui_demo.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui_demo.cpp.o -c /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o"
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o -MF CMakeFiles/imgui.dir/src/imgui_demo.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui_demo.cpp.o -c /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/imgui.dir/src/imgui_demo.cpp.i"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp > CMakeFiles/imgui.dir/src/imgui_demo.cpp.i
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp > CMakeFiles/imgui.dir/src/imgui_demo.cpp.i
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/src/imgui_demo.cpp.s"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp -o CMakeFiles/imgui.dir/src/imgui_demo.cpp.s
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_demo.cpp -o CMakeFiles/imgui.dir/src/imgui_demo.cpp.s
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o: src/imgui/CMakeFiles/imgui.dir/flags.make
-src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o: /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_tables.cpp
+src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o: /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_tables.cpp
 src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o: src/imgui/CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o -MF CMakeFiles/imgui.dir/src/imgui_tables.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui_tables.cpp.o -c /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_tables.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o"
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o -MF CMakeFiles/imgui.dir/src/imgui_tables.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui_tables.cpp.o -c /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_tables.cpp
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/imgui.dir/src/imgui_tables.cpp.i"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_tables.cpp > CMakeFiles/imgui.dir/src/imgui_tables.cpp.i
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_tables.cpp > CMakeFiles/imgui.dir/src/imgui_tables.cpp.i
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/src/imgui_tables.cpp.s"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_tables.cpp -o CMakeFiles/imgui.dir/src/imgui_tables.cpp.s
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_tables.cpp -o CMakeFiles/imgui.dir/src/imgui_tables.cpp.s
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o: src/imgui/CMakeFiles/imgui.dir/flags.make
-src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o: /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_widgets.cpp
+src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o: /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_widgets.cpp
 src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o: src/imgui/CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o -MF CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o -c /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_widgets.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o"
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o -MF CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o -c /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_widgets.cpp
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/imgui.dir/src/imgui_widgets.cpp.i"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_widgets.cpp > CMakeFiles/imgui.dir/src/imgui_widgets.cpp.i
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_widgets.cpp > CMakeFiles/imgui.dir/src/imgui_widgets.cpp.i
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/src/imgui_widgets.cpp.s"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_widgets.cpp -o CMakeFiles/imgui.dir/src/imgui_widgets.cpp.s
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_widgets.cpp -o CMakeFiles/imgui.dir/src/imgui_widgets.cpp.s
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o: src/imgui/CMakeFiles/imgui.dir/flags.make
-src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o: /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp
+src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o: /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp
 src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o: src/imgui/CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o -MF CMakeFiles/imgui.dir/src/imgui_draw.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui_draw.cpp.o -c /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o"
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o -MF CMakeFiles/imgui.dir/src/imgui_draw.cpp.o.d -o CMakeFiles/imgui.dir/src/imgui_draw.cpp.o -c /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/imgui.dir/src/imgui_draw.cpp.i"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp > CMakeFiles/imgui.dir/src/imgui_draw.cpp.i
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp > CMakeFiles/imgui.dir/src/imgui_draw.cpp.i
 
 src/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/src/imgui_draw.cpp.s"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/israel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp -o CMakeFiles/imgui.dir/src/imgui_draw.cpp.s
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/PrimaryFlightDisplay/src/imgui/src/imgui_draw.cpp -o CMakeFiles/imgui.dir/src/imgui_draw.cpp.s
 
 src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o: src/imgui/CMakeFiles/imgui.dir/flags.make
-src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o: /home/orzel/israel/PrimaryFlightDisplay/src/imgui/backends/imgui_impl_opengl3.cpp
+src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o: /home/orzel/PrimaryFlightDisplay/src/imgui/backends/imgui_impl_opengl3.cpp
 src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o: src/imgui/CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o -MF CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o -c /home/orzel/israel/PrimaryFlightDisplay/src/imgui/backends/imgui_impl_opengl3.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/orzel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o"
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o -MF CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.o -c /home/orzel/PrimaryFlightDisplay/src/imgui/backends/imgui_impl_opengl3.cpp
 
 src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.i"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/israel/PrimaryFlightDisplay/src/imgui/backends/imgui_impl_opengl3.cpp > CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.i
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/orzel/PrimaryFlightDisplay/src/imgui/backends/imgui_impl_opengl3.cpp > CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.i
 
 src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.s"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/israel/PrimaryFlightDisplay/src/imgui/backends/imgui_impl_opengl3.cpp -o CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.s
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/orzel/PrimaryFlightDisplay/src/imgui/backends/imgui_impl_opengl3.cpp -o CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.s
 
 # Object files for target imgui
 imgui_OBJECTS = \
@@ -177,18 +177,18 @@ src/imgui/libimgui.so: src/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl
 src/imgui/libimgui.so: src/imgui/CMakeFiles/imgui.dir/build.make
 src/imgui/libimgui.so: src/imgui/CMakeFiles/imgui.dir/compiler_depend.ts
 src/imgui/libimgui.so: src/imgui/CMakeFiles/imgui.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/orzel/israel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX shared library libimgui.so"
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/imgui.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/orzel/PrimaryFlightDisplay/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX shared library libimgui.so"
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/imgui.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/imgui/CMakeFiles/imgui.dir/build: src/imgui/libimgui.so
 .PHONY : src/imgui/CMakeFiles/imgui.dir/build
 
 src/imgui/CMakeFiles/imgui.dir/clean:
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui && $(CMAKE_COMMAND) -P CMakeFiles/imgui.dir/cmake_clean.cmake
+	cd /home/orzel/PrimaryFlightDisplay/bin/src/imgui && $(CMAKE_COMMAND) -P CMakeFiles/imgui.dir/cmake_clean.cmake
 .PHONY : src/imgui/CMakeFiles/imgui.dir/clean
 
 src/imgui/CMakeFiles/imgui.dir/depend:
-	cd /home/orzel/israel/PrimaryFlightDisplay/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/orzel/israel/PrimaryFlightDisplay /home/orzel/israel/PrimaryFlightDisplay/src/imgui /home/orzel/israel/PrimaryFlightDisplay/bin /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui /home/orzel/israel/PrimaryFlightDisplay/bin/src/imgui/CMakeFiles/imgui.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/orzel/PrimaryFlightDisplay/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/orzel/PrimaryFlightDisplay /home/orzel/PrimaryFlightDisplay/src/imgui /home/orzel/PrimaryFlightDisplay/bin /home/orzel/PrimaryFlightDisplay/bin/src/imgui /home/orzel/PrimaryFlightDisplay/bin/src/imgui/CMakeFiles/imgui.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : src/imgui/CMakeFiles/imgui.dir/depend
 

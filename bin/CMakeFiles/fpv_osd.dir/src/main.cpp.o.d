@@ -1,7 +1,6 @@
 CMakeFiles/fpv_osd.dir/src/main.cpp.o: \
- /home/orzel/israel/PrimaryFlightDisplay/src/main.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/14/iostream \
- /usr/include/c++/14/bits/requires_hosted.h \
+ /home/orzel/PrimaryFlightDisplay/src/main.cpp /usr/include/stdc-predef.h \
+ /usr/include/c++/14/iostream /usr/include/c++/14/bits/requires_hosted.h \
  /usr/include/aarch64-linux-gnu/c++/14/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/14/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -159,7 +158,16 @@ CMakeFiles/fpv_osd.dir/src/main.cpp.o: \
  /usr/include/c++/14/bits/locale_facets.tcc \
  /usr/include/c++/14/bits/basic_ios.tcc \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
- /usr/include/c++/14/bits/istream.tcc /usr/include/c++/14/vector \
+ /usr/include/c++/14/bits/istream.tcc /usr/include/c++/14/iomanip \
+ /usr/include/c++/14/locale \
+ /usr/include/c++/14/bits/locale_facets_nonio.h /usr/include/c++/14/ctime \
+ /usr/include/aarch64-linux-gnu/c++/14/bits/time_members.h \
+ /usr/include/aarch64-linux-gnu/c++/14/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/14/bits/codecvt.h \
+ /usr/include/c++/14/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/14/bits/locale_conv.h \
+ /usr/include/c++/14/bits/quoted_string.h /usr/include/c++/14/sstream \
+ /usr/include/c++/14/bits/sstream.tcc /usr/include/c++/14/vector \
  /usr/include/c++/14/bits/stl_uninitialized.h \
  /usr/include/c++/14/bits/stl_vector.h \
  /usr/include/c++/14/bits/stl_bvector.h \
@@ -170,7 +178,30 @@ CMakeFiles/fpv_osd.dir/src/main.cpp.o: \
  /usr/include/c++/14/bits/stl_map.h \
  /usr/include/c++/14/bits/stl_multimap.h \
  /usr/include/c++/14/bits/erase_if.h /usr/include/c++/14/cstring \
- /usr/include/string.h /usr/include/strings.h /usr/include/unistd.h \
+ /usr/include/string.h /usr/include/strings.h /usr/include/c++/14/cmath \
+ /usr/include/math.h /usr/include/aarch64-linux-gnu/bits/math-vector.h \
+ /usr/include/aarch64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/aarch64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/aarch64-linux-gnu/bits/fp-logb.h \
+ /usr/include/aarch64-linux-gnu/bits/fp-fast.h \
+ /usr/include/aarch64-linux-gnu/bits/mathcalls-macros.h \
+ /usr/include/aarch64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/aarch64-linux-gnu/bits/mathcalls.h \
+ /usr/include/aarch64-linux-gnu/bits/mathcalls-narrow.h \
+ /usr/include/aarch64-linux-gnu/bits/iscanonical.h \
+ /usr/include/c++/14/bits/specfun.h /usr/include/c++/14/limits \
+ /usr/include/c++/14/tr1/gamma.tcc \
+ /usr/include/c++/14/tr1/special_function_util.h \
+ /usr/include/c++/14/tr1/bessel_function.tcc \
+ /usr/include/c++/14/tr1/beta_function.tcc \
+ /usr/include/c++/14/tr1/ell_integral.tcc \
+ /usr/include/c++/14/tr1/exp_integral.tcc \
+ /usr/include/c++/14/tr1/hypergeometric.tcc \
+ /usr/include/c++/14/tr1/legendre_function.tcc \
+ /usr/include/c++/14/tr1/modified_bessel_func.tcc \
+ /usr/include/c++/14/tr1/poly_hermite.tcc \
+ /usr/include/c++/14/tr1/poly_laguerre.tcc \
+ /usr/include/c++/14/tr1/riemann_zeta.tcc /usr/include/unistd.h \
  /usr/include/aarch64-linux-gnu/bits/posix_opt.h \
  /usr/include/aarch64-linux-gnu/bits/environments.h \
  /usr/include/aarch64-linux-gnu/bits/confname.h \
@@ -192,7 +223,7 @@ CMakeFiles/fpv_osd.dir/src/main.cpp.o: \
  /usr/include/libdrm/drm_mode.h \
  /usr/lib/gcc/aarch64-linux-gnu/14/include/stdbool.h \
  /usr/include/libdrm/drm_fourcc.h /usr/include/gbm.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/camera.h \
+ /home/orzel/PrimaryFlightDisplay/src/camera.h \
  /usr/include/libcamera/libcamera/libcamera.h \
  /usr/include/libcamera/libcamera/camera.h /usr/include/c++/14/memory \
  /usr/include/c++/14/bits/stl_tempbuf.h \
@@ -226,7 +257,7 @@ CMakeFiles/fpv_osd.dir/src/main.cpp.o: \
  /usr/include/c++/14/compare /usr/include/libcamera/libcamera/controls.h \
  /usr/include/assert.h /usr/include/libcamera/libcamera/base/span.h \
  /usr/include/c++/14/iterator /usr/include/c++/14/bits/stream_iterator.h \
- /usr/include/c++/14/limits /usr/include/libcamera/libcamera/geometry.h \
+ /usr/include/libcamera/libcamera/geometry.h \
  /usr/include/c++/14/algorithm /usr/include/c++/14/bits/stl_algo.h \
  /usr/include/c++/14/bits/algorithmfwd.h \
  /usr/include/c++/14/bits/stl_heap.h \
@@ -253,36 +284,13 @@ CMakeFiles/fpv_osd.dir/src/main.cpp.o: \
  /usr/include/c++/14/bits/deque.tcc /usr/include/c++/14/bits/stl_queue.h \
  /usr/include/c++/14/mutex /usr/include/c++/14/bits/chrono.h \
  /usr/include/c++/14/ratio /usr/include/c++/14/cstdint \
- /usr/include/c++/14/ctime /usr/include/c++/14/bits/parse_numbers.h \
+ /usr/include/c++/14/bits/parse_numbers.h \
  /usr/include/c++/14/bits/std_mutex.h \
  /usr/include/c++/14/bits/unique_lock.h \
  /usr/include/c++/14/condition_variable /usr/include/EGL/egl.h \
  /usr/include/EGL/eglplatform.h /usr/include/KHR/khrplatform.h \
  /usr/include/EGL/eglext.h /usr/include/GLES2/gl2.h \
  /usr/include/GLES2/gl2platform.h /usr/include/GLES2/gl2ext.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/pixelfont.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/octafont-regular.h \
- /home/orzel/israel/PrimaryFlightDisplay/src/stb_truetype.h \
- /usr/include/c++/14/math.h /usr/include/c++/14/cmath /usr/include/math.h \
- /usr/include/aarch64-linux-gnu/bits/math-vector.h \
- /usr/include/aarch64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/aarch64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/aarch64-linux-gnu/bits/fp-logb.h \
- /usr/include/aarch64-linux-gnu/bits/fp-fast.h \
- /usr/include/aarch64-linux-gnu/bits/mathcalls-macros.h \
- /usr/include/aarch64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/aarch64-linux-gnu/bits/mathcalls.h \
- /usr/include/aarch64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/aarch64-linux-gnu/bits/iscanonical.h \
- /usr/include/c++/14/bits/specfun.h /usr/include/c++/14/tr1/gamma.tcc \
- /usr/include/c++/14/tr1/special_function_util.h \
- /usr/include/c++/14/tr1/bessel_function.tcc \
- /usr/include/c++/14/tr1/beta_function.tcc \
- /usr/include/c++/14/tr1/ell_integral.tcc \
- /usr/include/c++/14/tr1/exp_integral.tcc \
- /usr/include/c++/14/tr1/hypergeometric.tcc \
- /usr/include/c++/14/tr1/legendre_function.tcc \
- /usr/include/c++/14/tr1/modified_bessel_func.tcc \
- /usr/include/c++/14/tr1/poly_hermite.tcc \
- /usr/include/c++/14/tr1/poly_laguerre.tcc \
- /usr/include/c++/14/tr1/riemann_zeta.tcc /usr/include/c++/14/stdlib.h
+ /home/orzel/PrimaryFlightDisplay/src/pixelfont.h \
+ /home/orzel/PrimaryFlightDisplay/src/octafont-regular.h \
+ /home/orzel/PrimaryFlightDisplay/src/shaders.h
