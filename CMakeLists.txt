@@ -33,8 +33,9 @@ link_directories(
     ${DRM_LIBRARY_DIRS}
 )
 
-add_executable(fpv_osd src/main.cpp
-                        src/camera.cpp)
+add_executable(fpv_osd src/main_shader_test.cpp
+                        src/camera.cpp
+                        src/shaders.cpp)
 
 target_link_libraries(fpv_osd
     ${LIBCAMERA_LIBRARIES}
