@@ -559,7 +559,7 @@ void init_gl() {
 
 std::string getInstrumentText(int sensor_id)
 {
-    return instruments.getInstrumentText(sensor_id) + ": " + (instruments.getInstrumentInop(sensor_id) ? "INOP" : formatNumber(instruments.getInstrumentValue(sensor_id), 3, 2));
+    return Instruments::instrumentNames[sensor_id] + ": " + (instruments.getInstrumentInop(sensor_id) ? "INOP" : formatNumber(instruments.getInstrumentValue(sensor_id), 3, 2));
 }
 
 void printInstrumentData()

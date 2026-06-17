@@ -34,7 +34,7 @@ class Instruments {
         bool getInstrumentInop(int type) const;
         void cleanup();
 
-        const std::string[] instrumentNames = {
+        static const std::string[] instrumentNames = {
             "Battery Voltage",
             "Altitude",
             "Airspeed",
