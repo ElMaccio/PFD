@@ -19,6 +19,7 @@
 #include "pixelfont.h"
 #include "octafont-regular.h"
 #include "shaders.h"
+#include "instruments.h"
 
 #define NUMBER_WIDTH 5
 
@@ -80,6 +81,8 @@ static int screen_width = 0, screen_height = 0;
 static PFNEGLCREATESYNCKHRPROC eglCreateSyncKHR = nullptr;
 static PFNEGLCLIENTWAITSYNCKHRPROC eglClientWaitSyncKHR = nullptr;
 static PFNEGLDESTROYSYNCKHRPROC eglDestroySyncKHR = nullptr;
+
+Instruments instruments;
 
 // ----------------------------------------------------------------------
 // Camera globals
@@ -647,7 +650,11 @@ void draw_pfd() {
     drawPixelTextWithOutline(text, screen_width / 2, screen_height / 2 - 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
     drawPixelTextWithBackground(text, screen_width / 2, screen_height / 2 + 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 0.5f), 5);
 
-    drawPixelTextWithOutline("LOREM IPSUM murzynek Bambo byl czarny cos tam cos tam !,'/()*:\\", 25, 25, 5.0f);
+    std::string instrument_reading = "BATTERY VOLTAGE: " + formatNumber(13.6, 2, 2) + " V";
+
+    //drawPixelTextWithOutline("LOREM IPSUM murzynek Bambo byl czarny cos tam cos tam !,'/()*:\\", 25, 25, 5.0f);
+
+    drawPixelTextWithOutline(instrument_reading, 25, 25 + 10 * 100, 5.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
 
     for (int i = 0; i < 10; i++)
 {
@@ -769,6 +776,8 @@ void run() {
                               (void*)(2 * sizeof(float)));
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
+        instruments.readInstruments();
+
         draw_pfd();
 
         eglSwapBuffers(egl_display, egl_surface);
@@ -828,15 +837,20 @@ void cleanup() {
     std::cout << "Resources released." << std::endl;
 }
 
+void init() {
+    init_display();
+    init_gl();
+    instruments.initInstruments();
+}
+
 // ----------------------------------------------------------------------
 // Main
 int main() {
-    init_display();
-    init_gl();
     std::cout << formatNumber(1.1f, 3, 1) << "\n";
     std::cout << formatNumber(1.1567f, 3, 1) << "\n";
     std::cout << formatNumber(100.25f, 3, 1) << "\n";
     std::cout << formatNumber(15.0f, 3, 1) << "\n"; 
+    init();
     run();
     cleanup();
     return 0;
