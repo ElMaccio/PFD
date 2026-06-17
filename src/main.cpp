@@ -1,4 +1,3 @@
-#include <iostream>
 #include <iomanip>
 #include <vector>
 #include <map>
@@ -22,6 +21,7 @@
 #include "instruments.h"
 
 #define NUMBER_WIDTH 5
+#define SPACING 1
 
 //DEBUG ONLY
 float counter = 0.0f;
@@ -149,43 +149,37 @@ GLuint vbo_camera = 0;
 GLuint vbo_overlay = 0;
 GLuint vbo_text = 0;
 
-// ----------------------------------------------------------------------
-// Build texture atlas (unchanged)
 void buildPixelFontAtlas() {
-    const char* num_chars = "0123456789";
-    const char* chars = "ABCDEFGHIJKLMNOPRSTUWYXZQ.abcdefghijklmnoprstuwyxqz'!()*,/\\:";
-    const int count = strlen(chars);
+    const char* letters = "ABCDEFGHIJKLMNOPRSTUWVYXZQ.abcdefghijklmnoprstuwvyxqz'!()*,/\\:";
+    const char* digits  = "0123456789";
+    const int letter_count = strlen(letters);
+    const int digit_count  = strlen(digits);
+
+    // Calculate total atlas width: each letter uses its natural width, each digit uses NUMBER_WIDTH
     int total_width = 0;
-    int max_width = 0;
+    for (int i = 0; i < letter_count; ++i)
+        total_width += getFont().get_width(letters[i]);
+    total_width += digit_count * NUMBER_WIDTH;   // digits fixed width
 
-    for (int i = 0; i < count; ++i) {
-        int w = getFont().get_width(chars[i]);
-        total_width += w + 1;
-        if (w > max_width) max_width = w;
-    }
-
-    int numbers_count = strlen(num_chars);
-
-    total_width += numbers_count * NUMBER_WIDTH + 1;
-
-    total_width -= 1;
-
+    // Round up to power of two for texture
     pixel_atlas_width = 1;
     while (pixel_atlas_width < total_width) pixel_atlas_width <<= 1;
     pixel_atlas_height = 1;
     while (pixel_atlas_height < PIXEL_FONT_HEIGHT) pixel_atlas_height <<= 1;
 
     std::vector<unsigned char> bitmap(pixel_atlas_width * pixel_atlas_height, 0);
-
     int x_offset = 0;
-    for (int i = 0; i < count; ++i) {
-        char c = chars[i];
-        int w = getFont().get_width(c) + 1;
+
+    // ---- Letters (natural width) ----
+    for (int i = 0; i < letter_count; ++i) {
+        char c = letters[i];
+        int w = getFont().get_width(c);
+
+        // Write the actual character columns (no padding)
         for (int col = 0; col < w; ++col) {
             uint8_t column = getFont().get_octet(c, col);
             for (int row = 0; row < PIXEL_FONT_HEIGHT; ++row) {
-                int bit = (column >> row) & 1;
-                if (bit) {
+                if ((column >> row) & 1) {
                     int idx = row * pixel_atlas_width + (x_offset + col);
                     bitmap[idx] = 255;
                 }
@@ -200,40 +194,42 @@ void buildPixelFontAtlas() {
         info.t1 = 1.0f;
         pixel_glyph_map[c] = info;
 
-        x_offset += w + 1;
+        x_offset += w;   // advance by natural width
     }
 
-    for (int i = 0; i < numbers_count; i++)
-    {
-        char digit = num_chars[i];
-        int original_width = getFont().get_width(digit);
-        int left_padding = NUMBER_WIDTH - original_width;
+    // ---- Digits (constant width NUMBER_WIDTH) ----
+    for (int i = 0; i < digit_count; ++i) {
+        char d = digits[i];
+        int original_width = getFont().get_width(d);
+        int left_padding = NUMBER_WIDTH - original_width;   // right‑aligned (pad left)
+        // If you prefer centred, use left_padding = (NUMBER_WIDTH - original_width)/2
 
-        for(int col = 0; col < NUMBER_WIDTH; ++col) {
+        // Write NUMBER_WIDTH columns (digit placed with left_padding)
+        for (int col = 0; col < NUMBER_WIDTH; ++col) {
             uint8_t column = 0;
-            if(col >= left_padding) {
-                column = getFont().get_octet(digit, col - left_padding);
+            if (col >= left_padding && (col - left_padding) < original_width) {
+                column = getFont().get_octet(d, col - left_padding);
             }
-            for(int row = 0; row < PIXEL_FONT_HEIGHT; ++row) {
+            for (int row = 0; row < PIXEL_FONT_HEIGHT; ++row) {
                 if ((column >> row) & 1) {
                     int idx = row * pixel_atlas_width + (x_offset + col);
                     bitmap[idx] = 255;
-            }
+                }
             }
         }
 
         GlyphInfo info;
-        info.width = NUMBER_WIDTH;
+        info.width = NUMBER_WIDTH;                  // fixed width
         info.s0 = (float)x_offset / pixel_atlas_width;
         info.s1 = (float)(x_offset + NUMBER_WIDTH) / pixel_atlas_width;
         info.t0 = 1.0f - (float)PIXEL_FONT_HEIGHT / pixel_atlas_height;
         info.t1 = 1.0f;
+        pixel_glyph_map[d] = info;
 
-        pixel_glyph_map[digit] = info;
-
-        x_offset += NUMBER_WIDTH + 1;
+        x_offset += NUMBER_WIDTH;   // advance by fixed width
     }
 
+    // Create texture (unchanged)
     glGenTextures(1, &pixel_font_atlas);
     glBindTexture(GL_TEXTURE_2D, pixel_font_atlas);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -244,9 +240,6 @@ void buildPixelFontAtlas() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     CHECK_GL("buildPixelFontAtlas");
-
-    std::cout << "Pixel font atlas created: " << pixel_atlas_width << "x" << pixel_atlas_height
-              << " containing " << count << " characters." << std::endl;
 }
 
 float getPixelTextWidth(const std::string& text, float scale) {
@@ -298,7 +291,7 @@ void drawPixelText(const std::string& text, float x, float y, float scale, Color
         vertices.push_back(leftX);  vertices.push_back(bottomY);
         vertices.push_back(glyph.s0); vertices.push_back(glyph.t1);
 
-        cursor_x += glyphWidth;
+        cursor_x += glyphWidth + SPACING * scale;
     }
 
     if (vertices.empty()) return;
@@ -650,19 +643,11 @@ void draw_pfd() {
     drawPixelTextWithOutline(text, screen_width / 2, screen_height / 2 - 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
     drawPixelTextWithBackground(text, screen_width / 2, screen_height / 2 + 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 0.5f), 5);
 
-    std::string instrument_reading = "BATTERY VOLTAGE: " + formatNumber(13.6, 2, 2) + " V";
+    std::string instrument_reading = "BATTERY VOLTAGE: " + formatNumber(instruments.getInstrumentValue(Instruments::BatteryVoltage), 2, 2) + "V";
 
     //drawPixelTextWithOutline("LOREM IPSUM murzynek Bambo byl czarny cos tam cos tam !,'/()*:\\", 25, 25, 5.0f);
 
-    drawPixelTextWithOutline(instrument_reading, 25, 25 + 10 * 100, 5.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
-
-    for (int i = 0; i < 10; i++)
-{
-    char digit_char = '0' + i;
-    int width = getFont().get_width(digit_char);
-    std::string output = formatNumber(i, 1, 0) + ": " + std::to_string(width) + " pixels wide";
-    drawPixelTextWithOutline(output, 25, 25 + i * 100, 5.0f);
-} 
+    drawPixelTextWithOutline(instrument_reading, 25, 50, 5.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
 
     glDisable(GL_BLEND);
 }

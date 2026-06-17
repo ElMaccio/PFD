@@ -18,6 +18,8 @@ int Instruments::initInstruments() {
     for(int i=0;i<bufferSize;i++) 
             tx_buf[i]=0xFF;        
 
+    std::cout << "Instruments initialized." << std::endl;
+
     return 0;
 }
 

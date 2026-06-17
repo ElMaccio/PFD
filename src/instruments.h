@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <pigpio.h>
 #include <cstring>
+#include <iostream>
 
 //#define BUFFER_SIZE 64
 
