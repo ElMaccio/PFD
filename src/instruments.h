@@ -23,14 +23,26 @@ class Instruments {
 
         struct InstrumentData
         {
-            uint8_t idWithInop;
+            uint8_t id;
             float value;
+            bool isInop;
         } __attribute__((packed));
 
         int initInstruments();
         void readInstruments();
         float getInstrumentValue(int type) const;
+        bool getInstrumentInop(int type) const;
         void cleanup();
+
+        const std::string[] instrumentNames = {
+            "Battery Voltage",
+            "Altitude",
+            "Airspeed",
+            "Temperature 1",
+            "Temperature 2",
+            "Roll",
+            "Pitch"
+        };
 
         private:
             int spi_handle;
@@ -38,4 +50,6 @@ class Instruments {
             char tx_buf[NumInstruments * 5];
             char rx_buf[NumInstruments * 5];
             int bufferSize;
+
+            void setIdWithInop(InstrumentData& data, uint8_t idWithInop);
 };

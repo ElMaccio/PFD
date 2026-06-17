@@ -31,6 +31,9 @@ struct Color {
     Color(float r, float g, float b, float a = 1.0f) : r(r), g(g), b(b), a(a) {}
 };
 
+const Color INSTRUMENT_TEXT = Color(1.0f, 1.0f, 1.0f, 1.0f);
+const Color INSTRUMENT_TEXT_INOP = Color(1.0f, 0.3f, 0.0f, 1.0f);
+
 // ----------------------------------------------------------------------
 // EGL extension definitions (if not already defined)
 #ifndef EGL_NO_IMAGE_KHR
@@ -554,6 +557,18 @@ void init_gl() {
     CHECK_GL("init_gl");
 }
 
+std::string getInstrumentText(int sensor_id)
+{
+    return instruments.getInstrumentText(sensor_id) + ": " + (instruments.getInstrumentInop(sensor_id) ? "INOP" : formatNumber(instruments.getInstrumentValue(sensor_id), 3, 2));
+}
+
+void printInstrumentData()
+{
+    for(int i = 0; i < Instruments::NumInstruments; ++i) {
+        drawPixelTextWithOutline(getInstrumentText(i), 25, 50 + i * 25, 2.0f, (instruments.getInstrumentInop(i) ? INSTRUMENT_TEXT_INOP : INSTRUMENT_TEXT), Color(0.0f, 0.0f, 0.0f, 1.0f), 1);
+    }
+}
+
 // ----------------------------------------------------------------------
 // Draw overlay (uses Shaders)
 void draw_pfd() {
@@ -643,11 +658,13 @@ void draw_pfd() {
     drawPixelTextWithOutline(text, screen_width / 2, screen_height / 2 - 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
     drawPixelTextWithBackground(text, screen_width / 2, screen_height / 2 + 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 0.5f), 5);
 
-    std::string instrument_reading = "BATTERY VOLTAGE: " + formatNumber(instruments.getInstrumentValue(Instruments::BatteryVoltage), 2, 2) + "V";
+    //std::string instrument_reading = "BATTERY VOLTAGE: " + formatNumber(instruments.getInstrumentValue(Instruments::BatteryVoltage), 2, 2) + "V";
 
     //drawPixelTextWithOutline("LOREM IPSUM murzynek Bambo byl czarny cos tam cos tam !,'/()*:\\", 25, 25, 5.0f);
 
-    drawPixelTextWithOutline(instrument_reading, 25, 50, 5.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
+    //drawPixelTextWithOutline(instrument_reading, 25, 50, 5.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
+
+    printInstrumentData();
 
     glDisable(GL_BLEND);
 }

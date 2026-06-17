@@ -28,7 +28,7 @@ void Instruments::readInstruments() {
 
     for (int i = 0; i < NumInstruments; i++)
     {
-            instruments[i].idWithInop = rx_buf[i * 5];
+            setIdWithInop(instruments[i], rx_buf[i * 5]);
 
             memcpy(&instruments[i].value, &rx_buf[i * 5 + 1], sizeof(float));
 
@@ -41,7 +41,17 @@ float Instruments::getInstrumentValue(int type) const {
     return instruments[type].value;
 }
 
+float Instruments::getInstrumentInop(int type) const {
+    if (type < 0 || type >= NumInstruments) return false;
+    return instruments[type].isInop;
+}
+
 void Instruments::cleanup() {
     spiClose(spi_handle);
     gpioTerminate();
+}
+
+void Instruments::setIdWithInop(InstrumentData &data, uint8_t idWithInop) {
+    data.id = idWithInop & 0x7F;
+    data.isInop = (idWithInop & 0x80) != 0;
 }
