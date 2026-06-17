@@ -37,13 +37,13 @@ void Instruments::readInstruments() {
 }
 
 float Instruments::getInstrumentValue(int type) const {
-    if (type < 0 || type >= NumInstruments) return 0.0f;
-    return instruments[type].value;
+    if (type < 1 || type >= NumInstruments) return 0.0f;
+    return instruments[type - 1].value;
 }
 
-float Instruments::getInstrumentInop(int type) const {
-    if (type < 0 || type >= NumInstruments) return false;
-    return instruments[type].isInop;
+bool Instruments::getInstrumentInop(int type) const {
+    if (type < 1 || type >= NumInstruments) return false;
+    return instruments[type - 1].isInop;
 }
 
 void Instruments::cleanup() {
@@ -53,5 +53,11 @@ void Instruments::cleanup() {
 
 void Instruments::setIdWithInop(InstrumentData &data, uint8_t idWithInop) {
     data.id = idWithInop & 0x7F;
+
+    if(data.id == 0)
+    {
+        data.isInop = true;
+        return;
+    }
     data.isInop = (idWithInop & 0x80) != 0;
 }

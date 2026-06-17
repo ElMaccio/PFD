@@ -24,7 +24,7 @@
 #define SPACING 1
 
 //DEBUG ONLY
-float counter = 0.0f;
+//float counter = 0.0f;
 
 struct Color {
     float r, g, b, a;
@@ -559,14 +559,23 @@ void init_gl() {
 
 std::string getInstrumentText(int sensor_id)
 {
-    return Instruments::instrumentNames[sensor_id] + ": " + (instruments.getInstrumentInop(sensor_id) ? "INOP" : formatNumber(instruments.getInstrumentValue(sensor_id), 3, 2));
+    return Instruments::instrumentNames[sensor_id] + ": " + (instruments.getInstrumentInop(sensor_id) ? "XXX" : formatNumber(instruments.getInstrumentValue(sensor_id), 3, 2));
 }
 
 void printInstrumentData()
 {
-    for(int i = 0; i < Instruments::NumInstruments; ++i) {
-        drawPixelTextWithOutline(getInstrumentText(i), 25, 50 + i * 25, 2.0f, (instruments.getInstrumentInop(i) ? INSTRUMENT_TEXT_INOP : INSTRUMENT_TEXT), Color(0.0f, 0.0f, 0.0f, 1.0f), 1);
+    for(int i = 1; i < Instruments::NumInstruments - 1; ++i) {
+        drawPixelTextWithOutline(getInstrumentText(i), 210, 50 + i * 25, 2.0f, (instruments.getInstrumentInop(i) ? INSTRUMENT_TEXT_INOP : INSTRUMENT_TEXT), Color(0.0f, 0.0f, 0.0f, 1.0f), 1);
     }
+}
+
+float get_rpi_temp() {
+    FILE *f = fopen("/sys/class/thermal/thermal_zone0/temp", "r");
+    if (!f) return -1.0;
+    int millideg;
+    fscanf(f, "%d", &millideg);
+    fclose(f);
+    return millideg / 1000.0;
 }
 
 // ----------------------------------------------------------------------
@@ -652,11 +661,11 @@ void draw_pfd() {
     drawPixelText(number, x, y, scale, 1.0f, 1.0f, 1.0f, 1.0f);
     drawPixelTextWithOutline(number, x, y + 250, scale, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);*/
 
-    counter += 0.001f;
+    //counter += 0.001f;
 
-    std::string text = formatNumber(counter, 3, 2);
-    drawPixelTextWithOutline(text, screen_width / 2, screen_height / 2 - 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
-    drawPixelTextWithBackground(text, screen_width / 2, screen_height / 2 + 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 0.5f), 5);
+    //std::string text = formatNumber(counter, 3, 2);
+    //drawPixelTextWithOutline(text, screen_width / 2, screen_height / 2 - 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
+    //drawPixelTextWithBackground(text, screen_width / 2, screen_height / 2 + 50, 4.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 0.5f), 5);
 
     //std::string instrument_reading = "BATTERY VOLTAGE: " + formatNumber(instruments.getInstrumentValue(Instruments::BatteryVoltage), 2, 2) + "V";
 
@@ -665,6 +674,8 @@ void draw_pfd() {
     //drawPixelTextWithOutline(instrument_reading, 25, 50, 5.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.0f, 0.0f, 0.0f, 1.0f), 2);
 
     printInstrumentData();
+
+    drawPixelTextWithBackground(formatNumber(get_rpi_temp(), 2, 2), screen_width - 100, 50, 2.0f, Color(1.0f, 1.0f, 1.0f, 1.0f), Color (0.0f, 0.0f, 0.0f, 1.0f), 2);
 
     glDisable(GL_BLEND);
 }
