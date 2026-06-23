@@ -34,9 +34,10 @@ class Instruments {
         void readInstruments();
         float getInstrumentValue(int type) const;
         bool getInstrumentInop(int type) const;
+        std::string getInstrumentName(int type) const;
         void cleanup();
 
-        static inline const std::string instrumentNames[NumInstruments - 1] = {
+        static inline const std::string instrument_names[NumInstruments - 1] = {
             "Battery Voltage",
             "Altitude",
             "Airspeed",

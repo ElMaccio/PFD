@@ -26,7 +26,7 @@ int Instruments::initInstruments() {
 void Instruments::readInstruments() {
     spiXfer(spi_handle, tx_buf, rx_buf, bufferSize);
 
-    for (int i = 0; i < NumInstruments; i++)
+    for (int i = 0; i < NumInstruments - 1; i++)
     {
             setIdWithInop(instruments[i], rx_buf[i * 5]);
 
@@ -44,6 +44,11 @@ float Instruments::getInstrumentValue(int type) const {
 bool Instruments::getInstrumentInop(int type) const {
     if (type < 1 || type >= NumInstruments) return false;
     return instruments[type - 1].isInop;
+}
+
+std::string getInstrumentName(int type) const {
+    if (type < 1 || type >= NumInstruments) return "";
+    return instrument_names[type - 1];
 }
 
 void Instruments::cleanup() {

@@ -559,12 +559,13 @@ void init_gl() {
 
 std::string getInstrumentText(int sensor_id)
 {
-    return Instruments::instrumentNames[sensor_id] + ": " + (instruments.getInstrumentInop(sensor_id) ? "XXX" : formatNumber(instruments.getInstrumentValue(sensor_id), 3, 2));
+    return instruments.getInstrumentName(sensor_id) + ": " + (instruments.getInstrumentInop(sensor_id) ? "XXX" : formatNumber(instruments.getInstrumentValue(sensor_id), 3, 2));
 }
 
 void printInstrumentData()
 {
-    for(int i = 1; i < Instruments::NumInstruments - 1; ++i) {
+    //NumInstruments - 1 in loop TEST
+    for(int i = 1; i < Instruments::NumInstruments; ++i) {
         drawPixelTextWithOutline(getInstrumentText(i), 210, 50 + i * 25, 2.0f, (instruments.getInstrumentInop(i) ? INSTRUMENT_TEXT_INOP : INSTRUMENT_TEXT), Color(0.0f, 0.0f, 0.0f, 1.0f), 1);
     }
 }
