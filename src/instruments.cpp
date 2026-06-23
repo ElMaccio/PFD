@@ -13,7 +13,7 @@ int Instruments::initInstruments() {
         return 1;
     }
 
-    bufferSize = NumInstruments * 5;
+    bufferSize = (NumInstruments - 1) * 5;
 
     for(int i=0;i<bufferSize;i++) 
             tx_buf[i]=0xFF;        
@@ -46,7 +46,7 @@ bool Instruments::getInstrumentInop(int type) const {
     return instruments[type - 1].isInop;
 }
 
-std::string getInstrumentName(int type) const {
+std::string Instruments::getInstrumentName(int type) const {
     if (type < 1 || type >= NumInstruments) return "";
     return instrument_names[type - 1];
 }
