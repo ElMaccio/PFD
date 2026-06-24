@@ -33,7 +33,7 @@ void Instruments::readInstruments() {
             memcpy(&instruments[i].value, &rx_buf[i * 5 + 1], sizeof(float));
             
             if(i == Instruments::BatteryVoltage - 1)
-                instruments[i].value *= 0.25f;
+                instruments[i].value *= 0.00025f;
             
             //printf("%s, ID: 0x%02X, Value: %f %s, Inop: %d\n", instrument_names[i].c_str(), instruments[i].id, instruments[i].value, instrument_units[i], instruments[i].isInop);
     }
