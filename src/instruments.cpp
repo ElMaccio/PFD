@@ -32,7 +32,7 @@ void Instruments::readInstruments() {
 
             memcpy(&instruments[i].value, &rx_buf[i * 5 + 1], sizeof(float));
 
-            //printf("ID: 0x%02X, Value: %f\n", instruments[i].idWithInop, instruments[i].value);
+            printf("%s, ID: 0x%02X, Value: %f %s, Inop: %d\n", instrument_names[i], instruments[i].id, instruments[i].value, instrument_units[i], instruments[i].isInop);
     }
 }
 

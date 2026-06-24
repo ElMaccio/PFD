@@ -47,6 +47,16 @@ class Instruments {
             "Pitch"
         };
 
+        static inline const std::string instrument_units[NumInstruments - 1] = {
+            "mV",
+            "m",
+            "m/s",
+            "C",
+            "C",
+            "deg",
+            "deg"
+        };
+
         private:
             int spi_handle;
             InstrumentData instruments[NumInstruments - 1];
