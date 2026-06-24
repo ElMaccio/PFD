@@ -35,6 +35,7 @@ class Instruments {
         float getInstrumentValue(int type) const;
         bool getInstrumentInop(int type) const;
         std::string getInstrumentName(int type) const;
+        std::string getInstrumentUnit(int type) const;
         void cleanup();
 
         static inline const std::string instrument_names[NumInstruments - 1] = {
