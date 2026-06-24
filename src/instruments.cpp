@@ -31,8 +31,11 @@ void Instruments::readInstruments() {
             setIdWithInop(instruments[i], rx_buf[i * 5]);
 
             memcpy(&instruments[i].value, &rx_buf[i * 5 + 1], sizeof(float));
-
-            printf("%s, ID: 0x%02X, Value: %f %s, Inop: %d\n", instrument_names[i], instruments[i].id, instruments[i].value, instrument_units[i], instruments[i].isInop);
+            
+            if(i == Instruments::BatteryVoltage - 1)
+                instruments[i].value *= 0.25f;
+            
+            //printf("%s, ID: 0x%02X, Value: %f %s, Inop: %d\n", instrument_names[i].c_str(), instruments[i].id, instruments[i].value, instrument_units[i], instruments[i].isInop);
     }
 }
 
@@ -48,7 +51,13 @@ bool Instruments::getInstrumentInop(int type) const {
 
 std::string Instruments::getInstrumentName(int type) const {
     if (type < 1 || type >= NumInstruments) return "";
-    return instrument_names[type - 1];
+        return instrument_names[type - 1];
+}
+
+std::string Instruments::getInstrumentUnit(int type) const
+{
+    if (type < 1 || type >= NumInstruments) return "";
+        return instrument_units[type - 1];
 }
 
 void Instruments::cleanup() {

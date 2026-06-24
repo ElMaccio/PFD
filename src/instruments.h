@@ -38,17 +38,17 @@ class Instruments {
         void cleanup();
 
         static inline const std::string instrument_names[NumInstruments - 1] = {
-            "Battery Voltage",
-            "Altitude",
-            "Airspeed",
-            "Temperature 1",
-            "Temperature 2",
-            "Roll",
-            "Pitch"
+            "BV",
+            "Alt",
+            "As",
+            "T1",
+            "T2",
+            "Rl",
+            "Pc"
         };
 
         static inline const std::string instrument_units[NumInstruments - 1] = {
-            "mV",
+            "V",
             "m",
             "m/s",
             "C",
